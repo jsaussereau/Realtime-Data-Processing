@@ -1,0 +1,3 @@
+[submodule "AsteRISC-rtl"]
+	path = rtl/AsteRISC-rtl
+	url = https://github.com/jsaussereau/AsteRISC-rtl
