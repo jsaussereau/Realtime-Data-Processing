@@ -79,35 +79,63 @@ void debug_printf_d(int val) {
     debug_printf_c(*(--p));
 }
 
+void debug_printf_fixed(int32_t val, uint8_t frac_bits) {
+  if (frac_bits > 31) {
+    debug_printf_s("Error: frac_bits too large");
+    return;
+  }
+  
+  if (val < 0) {
+    debug_printf_c('-');
+    val = -val;
+  }
+  
+  int32_t integer_part = val >> frac_bits;
+  int64_t fractional_part = val & ((1LL << frac_bits) - 1);
+
+  debug_printf_d(integer_part);
+  debug_printf_c('.');
+  
+  fractional_part = (fractional_part * 1000000) >> frac_bits;
+
+  if (fractional_part == 0) {
+    debug_printf_d(0);
+  } else {
+    debug_printf_d(fractional_part);
+  }
+}
+
+
 void debug_printf(const char *format, ...) {
   int i;
   va_list ap;
 
   va_start(ap, format);
 
-  for (i = 0; format[i]; i++)
+  for (i = 0; format[i]; i++) {
     if (format[i] == '%') {
       while (format[++i]) {
-      if (format[i] == 'c') {
-        debug_printf_c(va_arg(ap,int));
-        break;
-      }
-      if (format[i] == 's') {
-        debug_printf_s(va_arg(ap,char*));
-        break;
-      }
-      if (format[i] == 'd') {
-        debug_printf_d(va_arg(ap,int));
-        break;
-      }
-      if (format[i] == 'x') {
-        debug_printf_x(va_arg(ap,int), 8);
-        break;
-      }
+        if (format[i] == 'c') {
+          debug_printf_c(va_arg(ap,int));
+          break;
+        }
+        if (format[i] == 's') {
+          debug_printf_s(va_arg(ap,char*));
+          break;
+        }
+        if (format[i] == 'd') {
+          debug_printf_d(va_arg(ap,int));
+          break;
+        }
+        if (format[i] == 'x') {
+          debug_printf_x(va_arg(ap,int), 8);
+          break;
+        }
       }
     } else {
       debug_printf_c(format[i]);
     }
+  }
   va_end(ap);
 }
 

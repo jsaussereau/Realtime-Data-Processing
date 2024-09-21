@@ -36,6 +36,8 @@ void debug_printf_d(int val);
 
 void debug_printf_x(unsigned long val, unsigned char char_count);
 
+void debug_printf_fixed(int32_t val, uint8_t frac_bits);
+
 void debug_printf(const char *format, ...);
 
 uint8_t get_init_value();
