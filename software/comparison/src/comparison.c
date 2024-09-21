@@ -259,7 +259,7 @@ int _entry() {
     }
   });
 
-  // C0: Intuitive loop unrolling x4
+  // C1: Intuitive loop unrolling x4
   volatile uint32_t cycles_process_loop_unrolling_x4;
   volatile uint32_t instr_process_loop_unrolling_x4;
   volatile uint32_t start_instr_loop_unrolling_x4;
@@ -290,7 +290,7 @@ int _entry() {
     }
   });
 
-  // C1: Better loop unrolling x4 -> limiting data dependency
+  // C2: Better loop unrolling x4 -> limiting data dependency
   volatile uint32_t cycles_process_loop_unrolling_2_x4;
   volatile uint32_t instr_process_loop_unrolling_2_x4;
   volatile uint32_t start_instr_loop_unrolling_2_x4;
@@ -321,7 +321,7 @@ int _entry() {
     }
   });
 
-  // C2: Better loop unrolling x8 -> limiting data dependency
+  // C3: Better loop unrolling x8 -> limiting data dependency
   volatile uint32_t cycles_process_loop_unrolling_x8;
   volatile uint32_t instr_process_loop_unrolling_x8;
   volatile uint32_t start_instr_loop_unrolling_x8;
@@ -593,7 +593,7 @@ int _entry() {
   debug_printf_fixed((instr_process_loop_unrolling_x4 - instr_loop) * (1 << PRECISION) / (STOP_ADDR - START_ADDR), PRECISION);
   debug_printf("\n");
 
-  debug_printf("\nC1: Loop Unrolling 2 (x4) [instr %d]\n", start_instr_loop_unrolling_2_x4);
+  debug_printf("\nC2: Loop Unrolling 2 (x4) [instr %d]\n", start_instr_loop_unrolling_2_x4);
   debug_printf("total cycles (16 bytes) = %d\n", cycles_process_loop_unrolling_2_x4);
   debug_printf("total instr (16 bytes) = %d\n", instr_process_loop_unrolling_2_x4);
   debug_printf("total cycles (1 byte) = "); 
@@ -603,7 +603,7 @@ int _entry() {
   debug_printf_fixed((instr_process_loop_unrolling_2_x4 - instr_loop) * (1 << PRECISION) / (STOP_ADDR - START_ADDR), PRECISION);
   debug_printf("\n");
 
-  debug_printf("\nC2: Loop Unrolling (x8) [instr %d]\n", start_instr_loop_unrolling_x8);
+  debug_printf("\nC3: Loop Unrolling (x8) [instr %d]\n", start_instr_loop_unrolling_x8);
   debug_printf("total cycles (16 bytes) = %d\n", cycles_process_loop_unrolling_x8);
   debug_printf("total instr (16 bytes) = %d\n", instr_process_loop_unrolling_x8);
   debug_printf("total cycles (1 byte) = ");
