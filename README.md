@@ -1,4 +1,4 @@
-# Realtime-CRC
+# Real-Time Data Processing for Embedded Communicating Systems: a Hardware/Software Co-Design Approach
 
 Embedded systems typically require the transmission of significant amounts of data to small-scale CPUs for applications such as radar signal processing, image processing, and embedded AI. 
 Ensuring data integrity during transmission is typically managed using Cyclic Redundancy Check (CRC) algorithms. 
